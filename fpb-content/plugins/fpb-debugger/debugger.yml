@@ -1,0 +1,14 @@
+#
+# FacePress Debugger Plugin
+# By the FacePress Team
+#
+
+---
+
+PluginName: FacePress Debugger
+PluginAuthor: The FacePress Team
+PluginWebsite: www.facepressblog.org
+Version: 0.1
+IncludeFile: fpb-debugger/debugger.php
+RequiresPlugins:
+  - FacePress jQuery Plugin

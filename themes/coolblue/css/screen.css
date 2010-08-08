@@ -1,0 +1,22 @@
+/* theme screen stylesheets */
+/* cake generics */
+@import url("'cake.generic.css'");
+
+/* import stylesheets and hide from IE/Mac \*/
+@import url("reset.css");
+@import url("coolblue.css");
+@import url("enhancements.css"); 
+/* end import/hide */
+
+/* custom stuff */
+#login-box {
+    width: 250px;
+    height: 50px;
+    position: absolute;
+    right: 12px;
+    top: 145px;
+    text-align: center;
+}
+
+/* jquery-ui */
+@import url("jquery-ui/jquery-ui-1.8.2.custom.css");
