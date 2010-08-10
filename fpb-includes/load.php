@@ -43,6 +43,7 @@ $page_title = $config["GlobalTitle"];
 if (FPBAuth::GetInstance()->IsLoggedIn())
     $smarty->assign_by_ref('user',FPBAuth::GetInstance()->GetUser());
 
+    require(BASEDIR.'/fpb-includes/toolbar.php');
 ob_start();
 
 /**
@@ -50,6 +51,7 @@ ob_start();
  * @see Hooks
  */
 Plugins::RunHook('head_load');
+fpb_toolbar_head();
 $head_contents = ob_get_contents();
 ob_clean();
 $smarty->assign('head',$head_contents);
@@ -90,22 +92,34 @@ if ((preg_match("|/(?<year>[0-9]{4})/(?<month>[0-9]{2})/(?<day>[0-9]{2})/(?<titl
     // Find a post
     $action = 'post';
     $post = FPBDatabase::Instance()->GatherPostFromURIData($action_parts);
-    /**
-     * The 'pre_post_assign' hook runs just before assigning the post to the Smarty engine
-     * @see Hooks
-     */
-    Plugins::RunHook('pre_post_assign');
-    $smarty->assign('post',$post);
+    if ($post == null) {
+        // 404!
+        $action = '404';
+        header('HTTP/1.0 404 Not found',true,404);
+    } else {
+        /**
+         * The 'pre_post_assign' hook runs just before assigning the post to the Smarty engine
+         * @see Hooks
+         */
+        Plugins::RunHook('pre_post_assign');
+        $smarty->assign('post',$post);
+    }
 } elseif (preg_match("|/(?<page>(.+))/?$|",$full_action_requested,$action_parts) != 0) {
     // Display a page
     $action = 'page';
     $page = FPBDatabase::Instance()->GetPageBySlug($action_parts['page']);
-    /**
-     * The 'pre_page_assign' hook runs just before assigning the page to the Smarty engine
-     * @see Hooks
-     */
-    Plugins::RunHook('pre_page_assign');
-    $smarty->assign('page',$page);
+    if ($page == null) {
+        // 404!
+        $action = '404';
+        header('HTTP/1.0 404 Not found',true,404);
+    } else {
+        /**
+         * The 'pre_page_assign' hook runs just before assigning the page to the Smarty engine
+         * @see Hooks
+         */
+        Plugins::RunHook('pre_page_assign');
+        $smarty->assign('page',$page);
+    }
 } else {
     // the default action
     $action = 'home'; // default to home
@@ -118,13 +132,14 @@ if ((preg_match("|/(?<year>[0-9]{4})/(?<month>[0-9]{2})/(?<day>[0-9]{2})/(?<titl
     Plugins::RunHook('pre_posts_home_assign');
     $smarty->assign('posts',$posts);
 }
-
-$body_contents = ob_get_contents();
+fpb_toolbar_body();
 /**
  * The 'body_post_action' hook runs in an output buffer just after the body action is performed
  * @see Hooks
  */
 Plugins::RunHook('body_post_action');
+
+$body_contents = ob_get_contents();
 ob_clean();
 $tpl_file = $action;
 /**

@@ -1,6 +1,4 @@
 /* theme screen stylesheets */
-/* cake generics */
-@import url("'cake.generic.css'");
 
 /* import stylesheets and hide from IE/Mac \*/
 @import url("reset.css");

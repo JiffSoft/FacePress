@@ -1,0 +1,165 @@
+/* fpb-admin.css
+ * CSS for the admin toolbar of FacePress
+ * (c) 2010 JiffSoft
+ * License: http://www.gnu.org/licenses/gpl.html GNU General Public License v3
+ */
+
+div#fpb-admin-tb {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    padding: 4px 1px;
+    margin: 25px 0;
+    z-index: 500 !important;
+    height: 350px;
+    width: 30px;
+    background: #DDDDDD;
+    /* CSS3 */
+    -moz-border-radius-topright: 8px;
+    -khtml-border-radius-topright: 8px;
+    -webkit-border-top-right-radius: 8px;
+    border-top-right-radius: 8px;
+    -moz-border-radius-bottomright: 8px;
+    -khtml-border-radius-bottomright: 8px;
+    -webkit-border-bottom-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    -moz-box-shadow: 0px 1px 10px #666, inset 1px 1px 0px #a4a4a4; /* inset creates a inner-shadow */
+    -khtml-box-shadow: 0px 1px 10px #666;
+    -webkit-box-shadow: 0px 1px 10px #666;
+    box-shadow: 0px 1px 10px #666;
+    /* CSS3 end */
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    border-right: 1px solid #eee;
+}
+
+#fpb-admin-tb div.menu-item {
+    width: 32px;
+    height: 32px;
+}
+
+#fpb-admin-tb div.menu-post {
+    background: transparent url('images/menu.png') no-repeat scroll -272px -33px;
+}
+#fpb-admin-tb div.menu-post:hover {
+    background: transparent url('images/menu.png') no-repeat scroll -272px -1px;
+}
+
+#fpb-admin-tb div.menu-plugins {
+    background: transparent url('images/menu.png') no-repeat scroll -181px -33px;
+}
+#fpb-admin-tb div.menu-plugins:hover {
+    background: transparent url('images/menu.png') no-repeat scroll -181px -1px;
+}
+
+#fpb-admin-tb div.menu-dashboard {
+    background: transparent url('images/menu.png') no-repeat scroll -61px -33px;
+}
+#fpb-admin-tb div.menu-dashboard:hover {
+    background: transparent url('images/menu.png') no-repeat scroll -61px -1px;
+}
+
+#fpb-admin-tb div.menu-media {
+    background: transparent url('images/menu.png') no-repeat scroll -121px -33px;
+}
+#fpb-admin-tb div.menu-media:hover {
+    background: transparent url('images/menu.png') no-repeat scroll -121px -1px;
+}
+
+#fpb-admin-tb div.menu-links {
+    background: transparent url('images/menu.png') no-repeat scroll -91px -33px;
+}
+#fpb-admin-tb div.menu-links:hover {
+    background: transparent url('images/menu.png') no-repeat scroll -91px -1px;
+}
+
+#fpb-admin-tb div.menu-comments {
+    background: transparent url('images/menu.png') no-repeat scroll -31px -33px;
+}
+#fpb-admin-tb div.menu-comments:hover {
+    background: transparent url('images/menu.png') no-repeat scroll -31px -1px;
+}
+
+#fpb-admin-tb div.menu-pages {
+    background: transparent url('images/menu.png') no-repeat scroll -151px -33px;
+}
+#fpb-admin-tb div.menu-pages:hover {
+    background: transparent url('images/menu.png') no-repeat scroll -151px -1px;
+}
+
+#fpb-admin-tb div.menu-appearance {
+    background: transparent url('images/menu.png') no-repeat scroll -1px -33px;
+}
+#fpb-admin-tb div.menu-appearance:hover {
+    background: transparent url('images/menu.png') no-repeat scroll -1px -1px;
+}
+
+#fpb-admin-tb div.menu-users {
+    background: transparent url('images/menu.png') no-repeat scroll -301px -33px;
+}
+#fpb-admin-tb div.menu-users:hover {
+    background: transparent url('images/menu.png') no-repeat scroll -301px -1px;
+}
+
+#fpb-admin-tb div.menu-tools {
+    background: transparent url('images/menu.png') no-repeat scroll -211px -33px;
+}
+#fpb-admin-tb div.menu-tools:hover {
+    background: transparent url('images/menu.png') no-repeat scroll -211px -1px;
+}
+
+#fpb-admin-tb div.menu-settings {
+    background: transparent url('images/menu.png') no-repeat scroll -241px -33px;
+}
+#fpb-admin-tb div.menu-settings:hover {
+    background: transparent url('images/menu.png') no-repeat scroll -241px -1px;
+}
+
+#fpb-admin-popup {
+    z-index: 600 !important;
+    overflow: auto;
+    position: fixed;
+    left: 0;
+    top: 25px;
+    width: 0;
+    height: 0;
+    display: none;
+    background: white;
+    border: 1px solid black;
+    padding: 8px;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0px 1px 10px #666, inset 1px 1px 0px #a4a4a4; /* inset creates a inner-shadow */
+    -khtml-box-shadow: 0px 1px 10px #666;
+    -webkit-box-shadow: 0px 1px 10px #666;
+    box-shadow: 0px 1px 10px #666;
+}
+
+#fpb-admin-popup .loading-img {
+    width: 96px;
+    background: url('images/loading.gif') center bottom no-repeat;
+    margin: auto;
+    padding-top: 48px;
+}
+
+#fpb-admin-popup .loading-img p {
+    padding-bottom: 20px;
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    margin: 0;
+}
+
+#fpb-admin-blackout {
+    z-index: 500 !important;
+    background: black;
+    opacity: 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}   

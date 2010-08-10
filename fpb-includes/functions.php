@@ -37,5 +37,26 @@ function randomPassword($len = 8) {
     return $pass;
 }
 
+function find_files($path, $pattern) {
+    $path = rtrim(str_replace("\\", "/", $path), '/') . '/';
+    $entries = Array();
+    $matches = Array();
+    $dir = dir($path);
+    while (false !== ($entry = $dir->read())) {
+        $entries[] = $entry;
+    }
+    $dir->close();
+    foreach ($entries as $entry) {
+        $fullname = $path . $entry;
+        if ($entry != '.' && $entry != '..' && is_dir($fullname)) {
+            $merge = array_merge($matches,find_files($fullname, $pattern));
+            foreach ($merge as $m)
+                array_push($matches,$m);
+        } else if (is_file($fullname) && preg_match($pattern, $fullname)) {
+            array_push($matches,$fullname);
+        }
+    }
+    return array_unique($matches);
+}
+
 ?>
- 

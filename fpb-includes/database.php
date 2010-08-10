@@ -321,7 +321,9 @@ class FPBDatabase
         $main_slug = $slug_parts[count($slug_parts) - 1];
         $page = $this->DirectQuery("SELECT * FROM ".$this->TableName('posts')." WHERE post_status='publish'
             AND post_type='page' AND post_name=?",array(0=>$main_slug));
-        if (count($page) == 1)
+        if (count($page) == 0)
+            return null;
+        elseif (count($page) == 1)
             return $page[0];
         foreach ($page as $p) {
             $parent = $this->DirectQuery("SELECT * FROM ".$this->TableName('posts')." WHERE post_status='publish'

@@ -70,9 +70,9 @@ p, dl { margin: 10px 25px; }
 
 /* images */
 img {
-   background: #F3F4F5;
+   /*background: #F3F4F5;
    border: 1px solid #E2E4E7;
-	padding: 10px;
+	padding: 10px;*/
 }
 img.float-right {	margin: 5px 0px 10px 10px; }
 img.float-left { margin: 5px 10px 10px 0px; }

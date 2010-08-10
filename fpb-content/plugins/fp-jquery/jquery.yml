@@ -10,3 +10,4 @@ PluginAuthor: The FacePress Team and the jQuery Team
 PluginWebsite: www.jquery.org
 Version: 1.4.2
 IncludeFile: fp-jquery/jquery.php
+MissionCritical: true

@@ -1,4 +1,5 @@
 <!-- footer-outer -->
+{$body_contents}
 <div id="footer-outer" class="clear"><div id="footer-wrap">
 
 	<div id="gallery" class="clear">

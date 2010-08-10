@@ -143,4 +143,15 @@ class FPBAuth {
     public function IsLoggedIn() {
         return $this->_user != null;
     }
+
+    //
+    // 0
+    // 1 member
+    // 2 banned
+    // 3 author
+    // 4 mod
+    // 5 admin
+    public function IsUserAdmin() {
+        return $this->_user->user_status & (2^5);
+    }
 }

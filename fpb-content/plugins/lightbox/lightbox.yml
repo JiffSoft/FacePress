@@ -1,0 +1,14 @@
+#
+# FacePress Debugger Plugin
+# By the FacePress Team
+#
+
+---
+
+PluginName: FacePress Automagic LightBox
+PluginAuthor: Leandro Vieira Pinho & The FacePress Team
+PluginWebsite: www.leandrovieira.com
+Version: 0.1
+IncludeFile: lightbox/lightbox.php
+RequiresPlugins:
+  - FacePress jQuery Plugin
