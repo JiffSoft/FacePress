@@ -45,12 +45,11 @@
 
 		<div class="footer-list">
 			<ul>
-			    <li><a href="index.html">Home</a></li>
-			    <li><a href="/blog">Blog</a></li>
-			    <li><a href="/blog/archives">Archives</a></li>
-			    <li><a href="/projects">Projects</a></li>
-			    <li><a href="/gaming">Gaming</a></li>
-			    <li><a href="/brewing">Homebrewing</a></li>
+			    <li><a href="/">Home</a></li>
+			    <li><a href="/archives">Archives</a></li>
+			    <li><a href="/pages/projects">Projects</a></li>
+			    <li><a href="/pages/gaming">Gaming</a></li>
+			    <li><a href="/pages/brewing">Homebrewing</a></li>
 			    <li><a href="http://www.jiffsoft.com/services">Services</a></li>
 			    <li><a href="/pages/about">About</a></li>
 			    <li><a href="/pages/contact">Contact</a></li>
@@ -88,7 +87,11 @@
       <h3>Archives</h3>
 
 	   <div class="footer-list">
-			<? //$this->render('archives-list.ctp') ?>
+            <ul>{section name=archive loop=$archives}
+			    {strip}
+			        <li><a href="/archives/{$archives[archive]->year}/{$archives[archive]->month}">{$archives[archive]->label}</a></li>
+			    {/strip}
+			{/section}</ul>
 		</div>
 
 	</div>
@@ -100,6 +103,9 @@
 <div id="footer-bottom">
 
 	<p class="bottom-left">
+	    <a href="http://www.facepressblog.org/">
+	        <img src="/fpb-content/images/badge.png" alt="Powered by FacePress"/>
+	    </a>&nbsp;&nbsp;
 		&copy; 2010 <strong>Jonathan Enzinna</strong>&nbsp; &nbsp; &nbsp;
 		<a href="http://www.bluewebtemplates.com/" title="Website Templates">website templates</a> by <a href="http://www.styleshout.com/">styleshout</a>
 	</p>

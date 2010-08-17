@@ -154,4 +154,8 @@ class FPBAuth {
     public function IsUserAdmin() {
         return $this->_user->user_status & (2^5);
     }
+
+    public function IsUserBanned() {
+        return $this->_user->user_status & (2^2);
+    }
 }

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
 
 <head>
-    <title>{$page_title|default:"I got no title!"}</title>
+    <title>{$site_name} | {$page_title|default:"I got no title!"}</title>
     <link rel="stylesheet" href="{$theme_path}/css/screen.css" type="text/css" media="screen print projection"/>
     {$head}
 </head>
@@ -16,7 +16,7 @@
 	<a name="top"></a>
 
 	<h1 id="logo-text"><a href="/" title="">{$site_name}</a></h1>
-	<p id="slogan">{$slogan}</p>
+	<p id="slogan">{$site_slogan}</p>
 
 	<div  id="nav">
 		<ul>
@@ -25,6 +25,15 @@
 		            <li><a href="{$nav_links[navigation].href}">{$nav_links[navigation].text}</a></li>
 		        {/strip}
 		    {/section}
+		    <li><a href="/">Home</a></li>
+		    <li><a href="/archives">Archives</a></li>
+		    <li><a href="/pages/projects">Projects</a></li>
+            <li><a href="/pages/gaming">Gaming</a></li>
+            <li><a href="/pages/brewing">Homebrewing</a></li>
+            <li><a href="http://www.jiffsoft.com/services">Services</a></li>
+            <li><a href="/forum">Forum</a></li>
+            <li><a href="/pages/about">About</a></li>
+            <li><a href="/pages/contact">Contact</a></li>
 		</ul>
 	</div>
 
@@ -32,10 +41,9 @@
       <a href="/blog/index.rss">Grab the RSS feed</a>
    </p>
 
-   <form id="quick-search" method="get" action="index.html">
-      <fieldset class="search">
+   <form id="quick-search" method="get" action="/search">
          <label for="qsearch">Search:</label>
-         <input id="searchbox" class="tbox" id="qsearch" type="text" name="qsearch" value="Search..." title="Start typing and hit ENTER" />
+         <input id="searchbox" class="tbox" id="qsearch" type="text" name="q" value="Search..." title="Start typing and hit ENTER" />
          <button class="btn" title="Submit Search">Search</button>
       </fieldset>
    </form>

@@ -6,4 +6,9 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License v3
  */
 
-echo 'This is a dashboard!';
+interface FPBPage {
+    
+
+    public function userHasAccess($user);
+    public function render($parameters);
+}

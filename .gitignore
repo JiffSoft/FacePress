@@ -3,3 +3,4 @@
 .DS_Store
 thumbs.db
 config.inc.php
+cache

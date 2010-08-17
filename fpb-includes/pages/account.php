@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * @package FacePress
  * @version $Id$
@@ -6,4 +6,6 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License v3
  */
 
-echo 'This is a dashboard!';
+class AccountPage implements FPBPage {
+    
+}

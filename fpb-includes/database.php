@@ -281,6 +281,12 @@ class FPBDatabase
             array($_name,$_data,$_data));
     }
 
+    public function GatherPostsFromArchive($_data)
+    {
+        return $this->DirectQuery("SELECT * FROM ".$this->TableName('posts')." WHERE post_type='post' AND post_status='publish'
+            AND MONTH(post_date) = ? AND YEAR(post_date) = ?",array(0=>$_data['month'],1=>$_data['year']));
+    }
+
     public function GatherPostFromURIData($_data)
     {
         $posts = $this->DirectQuery("SELECT * FROM ".$this->TableName('posts')." WHERE post_type='post' AND post_status='publish'
@@ -331,5 +337,18 @@ class FPBDatabase
             if (($parent) && ($parent['post_name'] == $slug_parts[count($slug_parts) - 2]))
                 return $p;
         }
+    }
+
+    public function GetArchiveList()
+    {
+        return $this->DirectQuery("select distinct date_format(post_date, '%M %Y') as label,
+            date_format(post_date,'%m') as month, date_format(post_date,'%Y') as year
+            from ".$this->TableName('posts')." where post_status='publish' and post_type='page'
+            order by post_date desc");
+    }
+
+    public function Search($_needle)
+    {
+        return null;
     }
 }
