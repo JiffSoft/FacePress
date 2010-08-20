@@ -289,29 +289,29 @@ fieldset.search {
 	margin: 0; padding: 0;
 	width: 750px;
 }
-#header #nav ul {
+#header #nav ul#main-nav {
 	float: left;	
 	list-style: none;
 	margin: 0; padding: 0;
 	height: 45px;
 }
-#header #nav ul li {
+#header #nav ul#main-nav li {
 	float: left;
 	margin: 0; padding: 0;			
 }
-#header #nav ul li a {
+#header #nav ul#main-nav li a {
 	float:left;
 	margin: 0;
 	padding: 0 15px 29px 15px;
 	color: #baa7a7;
 	font: bold 12px 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, Sans-Serif;
 }
-#header #nav ul li a:hover, 
-#header #nav ul li a:active {
+#header #nav ul#main-nav li a:hover,
+#header #nav ul#main-nav li a:active {
 	border: none;
 	color: #fff;
 }
-#header #nav ul li#current a {
+#header #nav ul#main-nav li#current a {
 	background: transparent url(../img/current.jpg) no-repeat center bottom;
 	color: #fff;
 }

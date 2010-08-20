@@ -16,5 +16,49 @@
     text-align: center;
 }
 
+
+#main-nav li ul {
+	position:absolute;
+    margin: 0;
+	display:none;
+    top: 35px;
+    background: #141c1f;
+    -webkit-border-bottom-right-radius: 12px;
+    -webkit-border-bottom-left-radius: 12px;
+    -moz-border-radius-bottomright: 12px;
+    -moz-border-radius-bottomleft: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+#main-nav ul li ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: block;
+}
+#header #nav ul#main-nav li ul li {
+    display: block;
+    float: none;
+    margin: 0;
+    padding: 0;
+}
+#header #nav ul#main-nav li ul li a {
+    padding: 12px 0;
+}
+
+
+/* SHOW SUBMENU 1 */
+#main-nav li:hover ul, #main-nav li.over ul {
+	display:block;
+}
+#main-nav li:hover ul ul, #main-nav li.over ul ul {
+	display:none;
+}
+/* SHOW SUBMENU 2 */
+#main-nav ul li:hover ul, #main-nav ul li.over ul {
+	display:block;
+}
+
+
 /* jquery-ui */
 @import url("jquery-ui/jquery-ui-1.8.2.custom.css");

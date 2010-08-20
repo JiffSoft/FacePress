@@ -18,25 +18,16 @@
       <h3>Updates</h3>
 
       <ul class="subscribe-stuff">
-      	<li><a title="RSS" href="index.html" rel="nofollow">
+      	    <li><a title="RSS" href="/rss" rel="nofollow">
 				<img alt="RSS" title="RSS" src="{$theme_path}/img/social_rss.png" /></a>
 			</li>
-      	<li><a title="Facebook" href="index.html" rel="nofollow">
+      	    <li><a title="Facebook" href="http://www.facebook.com/jonnyfunfun" rel="nofollow">
 				<img alt="Facebook" title="Facebook" src="{$theme_path}/img/social_facebook.png" /></a>
 			</li>
-			<li><a title="Twitter" href="index.html" rel="nofollow">
+			<li><a title="Twitter" href="http://twitter.com/jonnyfunfun" rel="nofollow">
 				<img alt="Twitter" title="Twitter" src="{$theme_path}/img/social_twitter.png" /></a>
 			</li>
-			<li><a title="E-mail this story to a friend!" href="index.html" rel="nofollow">
-				<img alt="E-mail this story to a friend!" title="E-mail this story to a friend!" src="/img/social_email.png" /></a>
-			</li>
       </ul>
-
-      <p>Stay up to date. Subscribe via
-		<a href="index">RSS</a>, <a href="index">Facebook</a>,
-		<a href="index">Twitter</a> or <a href="index">Email</a>
-		</p>
-
 	</div>
 
 	<div class="col-a">
@@ -46,13 +37,11 @@
 		<div class="footer-list">
 			<ul>
 			    <li><a href="/">Home</a></li>
-			    <li><a href="/archives">Archives</a></li>
-			    <li><a href="/pages/projects">Projects</a></li>
-			    <li><a href="/pages/gaming">Gaming</a></li>
-			    <li><a href="/pages/brewing">Homebrewing</a></li>
-			    <li><a href="http://www.jiffsoft.com/services">Services</a></li>
-			    <li><a href="/pages/about">About</a></li>
-			    <li><a href="/pages/contact">Contact</a></li>
+                {section name=page loop=$pages}
+                    {strip}
+                        <li><a href="{$pages[page]->uri}">{$pages[page]->post_title}</a></li>
+                    {/strip}
+                {/section}
 			</ul>
 		</div>
 
@@ -113,9 +102,8 @@
 	<p class="bottom-right">
 		<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> |
 	   <a href="http://validator.w3.org/check/referer">XHTML</a>	|
-		<a href="index.html">Home</a> |
-		<a href="index.html">Sitemap</a> |
-		<a href="index.html">RSS Feed</a> |
+		<a href="/">Home</a> |
+		<a href="/rss">RSS Feed</a> |
       <strong><a href="#top">Back to Top</a></strong>
    </p>
 

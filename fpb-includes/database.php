@@ -351,4 +351,25 @@ class FPBDatabase
     {
         return null;
     }
+
+    public function GetPageArray()
+    {
+        return $this->FetchPageArray(0);
+    }
+
+    private function FetchPageArray($_ID,$_previous_slug = "/")
+    {
+        $pages = $this->DirectQuery("select ID, post_name, post_title, post_parent from ".$this->TableName('posts')." WHERE
+            post_status = 'publish' AND post_type = 'page' AND post_parent = ?",array(0=>$_ID));
+        if (count($pages) == 0)
+            return null;
+        $ret = array();
+        foreach ($pages as $page) {
+            $page = (object) $page;
+            $page->uri = $_previous_slug.$page->post_name;
+            $page->subpages = $this->FetchPageArray($page->ID, $_previous_slug.$page->post_name."/");
+            array_push($ret,$page);
+        }
+        return $ret;
+    }
 }

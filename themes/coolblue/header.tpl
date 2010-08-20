@@ -6,6 +6,7 @@
     <title>{$site_name} | {$page_title|default:"I got no title!"}</title>
     <link rel="stylesheet" href="{$theme_path}/css/screen.css" type="text/css" media="screen print projection"/>
     {$head}
+    <script type="text/javascript" src="{$theme_path}/js/coolblue.js"></script>
 </head>
 
 <body>
@@ -18,32 +19,36 @@
 	<h1 id="logo-text"><a href="/" title="">{$site_name}</a></h1>
 	<p id="slogan">{$site_slogan}</p>
 
-	<div  id="nav">
-		<ul>
-		    {section name=navigation loop=$nav_links}
-		        {strip}
-		            <li><a href="{$nav_links[navigation].href}">{$nav_links[navigation].text}</a></li>
-		        {/strip}
-		    {/section}
-		    <li><a href="/">Home</a></li>
-		    <li><a href="/archives">Archives</a></li>
-		    <li><a href="/pages/projects">Projects</a></li>
-            <li><a href="/pages/gaming">Gaming</a></li>
-            <li><a href="/pages/brewing">Homebrewing</a></li>
-            <li><a href="http://www.jiffsoft.com/services">Services</a></li>
-            <li><a href="/forum">Forum</a></li>
-            <li><a href="/pages/about">About</a></li>
-            <li><a href="/pages/contact">Contact</a></li>
-		</ul>
+	<div id="nav">
+        <ul id="main-nav">
+            <li><a href="/">Home</a></li>
+            {section name=page loop=$pages}
+                {strip}
+                    <li><a href="{$pages[page]->uri}">{$pages[page]->post_title}</a>
+                    {if isset($pages[page]->subpages)}
+                        <ul>
+                        {foreach item=subpage from=$pages[page]->subpages}
+                            {strip}
+                                <li><a href="{$subpage->uri}">{$subpage->post_title}</a></li>
+                            {/strip}
+                        {/foreach}
+                        </ul>
+                    {/if}
+                    </li>
+                {/strip}
+            {/section}
+        </ul>
+        <div id="sub-link-bar"></div>
 	</div>
 
    <p id="rss">
-      <a href="/blog/index.rss">Grab the RSS feed</a>
+      <a href="/rss">Grab the RSS feed</a>
    </p>
 
    <form id="quick-search" method="get" action="/search">
+      <fieldset class="search">
          <label for="qsearch">Search:</label>
-         <input id="searchbox" class="tbox" id="qsearch" type="text" name="q" value="Search..." title="Start typing and hit ENTER" />
+         <input class="tbox" id="qsearch" type="text" name="q" value="Search..." title="Start typing and hit ENTER" />
          <button class="btn" title="Submit Search">Search</button>
       </fieldset>
    </form>

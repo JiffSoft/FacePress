@@ -123,7 +123,7 @@ if ((preg_match("|/(?<year>[0-9]{4})/(?<month>[0-9]{2})/(?<day>[0-9]{2})/(?<titl
     Plugins::RunHook('pre_posts_archive_assign');
     $smarty->assign('posts',$posts);
     $smarty->assign('page_title','Archives for '.$action_parts['month'].'/'.$action_parts['year']);
-} elseif (preg_match("|/search/?$|",$full_action_requested,$action_parts) != 0) {
+} elseif (preg_match("|/search|",$full_action_requested,$action_parts) != 0) {
     // Search!
     $action = 'search';
     $results = null;
@@ -150,6 +150,49 @@ if ((preg_match("|/(?<year>[0-9]{4})/(?<month>[0-9]{2})/(?<day>[0-9]{2})/(?<titl
         $smarty->assign('results',$results);
         $smarty->assign('page_title','Search the site');
     }
+} elseif (preg_match("|/rss/?|",$full_action_requested,$action_parts) != 0) {
+    // RSS FEED
+    $posts = FPBDatabase::Instance()->GatherPosts(20);
+    header("Content-Type: application/rss+xml; charset=ISO-8859-1");
+    $rss_title = $config["GlobalName"];
+    $rss_description = $config["GlobalSlogan"];
+    $last_build = getdate();
+    $last_pub = $posts[0]->post_date;
+    $link = "http".($_SERVER['SERVER_PORT'] == 443 ? 's' : '').'://'.$_SERVER['SERVER_NAME']."/";
+    echo '<?xml version="1.0" encoding="ISO-8859-1" ?>';
+    echo <<<RSSXML
+            <!-- generator="FacePress/0.0.1 -->
+            <rss version="2.0">
+                <channel>
+                    <title>$rss_title</title>
+                    <link>$link</link>
+                    <description>$rss_description</description>
+                    <language>en</language>
+                    <docs>http://www.rssboard.org/rss-specification</docs>
+                    <lastBuildDate>$last_build</lastBuildDate>
+                    <pubDate>$last_pub</pubDate>
+RSSXML;
+    foreach ($posts as $post) {
+        echo "\n";
+        $fulllink = $link.$post->post_date['year'].'/'.$post->post_date['month'].'/'.$post->post_date['day'].'/'.$post->post_name;
+        $excerpt = str_truncate(strip_tags($post->post_content),300);
+        $date = date("D, d M Y H:i:s O", $post->post_date); 
+        echo <<<RSSXML
+                    <item>
+                        <title>$post->post_title</title>
+                        <link>$fulllink</link>
+                        <description><![CDATA[$excerpt]]></description>
+                        <pubDate>$date</pubDate>
+                    </item>
+RSSXML;
+    }
+    echo "\n";
+    echo <<<RSSXML
+                </channel>
+            </rss>
+        </xml>
+RSSXML;
+    die;
 } elseif (preg_match("|/(?<page>(.+))/?$|",$full_action_requested,$action_parts) != 0) {
     // Display a page
     $action = 'page';
@@ -202,6 +245,9 @@ $smarty->assign('body_contents',$body_contents);
 // Grab all archives for the $archives variable to be populated
 $archives = FPBDatabase::Instance()->GetArchiveList();
 $smarty->assign('archives',$archives);
+// Grab array of all pages
+$pages = FPBDatabase::Instance()->GetPageArray();
+$smarty->assign('pages',$pages);
 
 /**
  * The 'pre_render' hook runs just before we render the smarty template to the client
