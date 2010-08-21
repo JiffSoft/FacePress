@@ -6,7 +6,6 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License v3
  */
 
-
 define('BASEDIR',dirname(__FILE__));
 
 // check for a valid installation

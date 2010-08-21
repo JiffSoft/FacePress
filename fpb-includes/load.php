@@ -74,29 +74,20 @@ ob_start();
  * @see Hooks
  */
 Plugins::RunHook('body_pre_action');
-if ((preg_match("|/(?<year>[0-9]{4})/(?<month>[0-9]{2})/(?<day>[0-9]{2})/(?<title>(.*))/comments/?$|",$full_action_requested,$action_parts) != 0)
-    && (count($_POST) > 0)) {
-    // post of a comment
-    if ((!FPBAuth::GetInstance()->IsLoggedIn()) || (FPBAuth::GetInstance()->IsUserBanned())) {
-        $action = '403';
-        header('HTTP/1.0 403 Not authorized',true,403);
-        $smarty->assign('page_title','Not authorized');
-    } else {
+if (preg_match("|/(?<year>[0-9]{4})/(?<month>[0-9]{2})/(?<day>[0-9]{2})/(?<title>[-A-Za-z0-9_]*)/?$|",$full_action_requested,$action_parts) != 0) {
+    if ($_SERVER['REQUEST_METHOD'] == 'post') {
+        // post of a comment
+        if ((!FPBAuth::GetInstance()->IsLoggedIn()) || (FPBAuth::GetInstance()->IsUserBanned())) {
+            $action = '403';
+            header('HTTP/1.0 403 Not authorized',true,403);
+            $smarty->assign('page_title','Not authorized');
+        }
         // and afterwards we go back to the post
-        $action = 'post';
-        $post = FPBDatabase::Instance()->GatherPostFromURIData($action_parts);
-        /**
-         * The 'pre_post_assign' hook runs just before assigning the post to the Smarty engine
-         * @see Hooks
-         */
-        Plugins::RunHook('pre_post_assign');
-        $smarty->assign('post',$post);
-        $smarty->assign('page_title',$post->post_title);
     }
-} elseif (preg_match("|/(?<year>[0-9]{4})/(?<month>[0-9]{2})/(?<day>[0-9]{2})/(?<title>(.*))/?$|",$full_action_requested,$action_parts) != 0) {
     // Find a post
     $action = 'post';
     $post = FPBDatabase::Instance()->GatherPostFromURIData($action_parts);
+    $comments = FPBDatabase::Instance()->GetCommentsArray($post->ID);
     if ($post == null) {
         // 404!
         $action = '404';
@@ -109,6 +100,7 @@ if ((preg_match("|/(?<year>[0-9]{4})/(?<month>[0-9]{2})/(?<day>[0-9]{2})/(?<titl
          */
         Plugins::RunHook('pre_post_assign');
         $smarty->assign('post',$post);
+        $smarty->assign('comments',$comments);
         $smarty->assign('page_title',$post->post_title);
     }
 } elseif (preg_match("|/archives/(?<year>[0-9]{4})/(?<month>[0-9]{2})/?$|",$full_action_requested,$action_parts) != 0) {
@@ -256,6 +248,7 @@ $smarty->assign('pages',$pages);
 Plugins::RunHook('pre_render');
 
 // make it happen!
+header('Content-type: text/html; charset=UTF-8;',true);
 $smarty->display($tpl_file.'.tpl');
 /**
  * The 'page_ended' hook is executed at the very end of execution, this is a good

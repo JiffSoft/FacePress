@@ -59,6 +59,10 @@
 	display:block;
 }
 
+.center {
+    text-align: center;
+    margin: auto;
+}
 
 /* jquery-ui */
 @import url("jquery-ui/jquery-ui-1.8.2.custom.css");

@@ -27,9 +27,12 @@ function FPB_Lightbox_Magic()
     echo <<<HTML
     <script type="text/javascript" language="JavaScript">
         /* FacePress LightBox Automagic Creation */
-        $('a > img').parent('a').lightBox({
-            imageLoading: '$dir/images/lightbox-ico-loading.gif',
-            imageBtnClose: '$dir/images/lightbox-btn-close.gif'
+        $('a > img').parent('a').each(function() {
+            if ($(this).attr('href').match(/\.(jpg|jpeg|png|gif|bmp)$/i))
+                $(this).lightBox({
+                    imageLoading: '$dir/images/lightbox-ico-loading.gif',
+                    imageBtnClose: '$dir/images/lightbox-btn-close.gif'
+                });
         });
     </script>
 HTML;

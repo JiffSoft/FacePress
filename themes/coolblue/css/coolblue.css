@@ -74,8 +74,7 @@ img {
    border: 1px solid #E2E4E7;
 	padding: 10px;*/
 }
-img.float-right {	margin: 5px 0px 10px 10px; }
-img.float-left { margin: 5px 10px 10px 0px; }
+img.float-right, img.float-left { margin: 5px; }
 
 code {
   	margin: 3px 0;
@@ -900,4 +899,16 @@ ul.archive li .post-details a:visited {
 	clear:both;
 	height:0;
 	content: " ";
-}  
+}
+
+.comment-list {
+    width: 477px;
+}
+
+.comment {
+    margin: 10px 25px 10px 25px;
+	padding: 10px 25px 25px 25px;
+    background: #F3F4F5;
+    border: 1px solid #E2E4E7;
+	width: 100%;
+}

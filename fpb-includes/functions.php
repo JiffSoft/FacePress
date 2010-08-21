@@ -74,4 +74,58 @@ function find_files($path, $pattern) {
     return array_unique($matches);
 }
 
+function format_post($post) {
+    $post = nl2br($post);
+    $bbcode_search = array(
+        '/\[br\]/is',
+        '/\[b\](.*?)\[\/b\]/is',
+        '/\[i\](.*?)\[\/i\]/is',
+        '/\[u\](.*?)\[\/u\]/is',
+        '/\[url\=(.*?)\](.*?)\[\/url\]/is',
+        '/\[url\](.*?)\[\/url\]/is',
+        '/\[align\=(left|center|right)\](.*?)\[\/align\]/is',
+        '/\[img\](.*?)\[\/img\]/is',
+        '/\[mail\=(.*?)\](.*?)\[\/mail\]/is',
+        '/\[mail\](.*?)\[\/mail\]/is',
+        '/\[font\=(.*?)\](.*?)\[\/font\]/is',
+        '/\[size\=(.*?)\](.*?)\[\/size\]/is',
+        '/\[color\=(.*?)\](.*?)\[\/color\]/is',
+        '/\[codearea\](.*?)\[\/codearea\]/is',
+        '/\[code\](.*?)\[\/code\]/is',
+        '/\[p\](.*?)\[\/p\]/is',
+    );
+    $bbcode_replace = array(
+        '<br />',
+        '<strong>$1</strong>',
+        '<em>$1</em>',
+        '<u>$1</u>',
+        '<a href="$1" rel="nofollow" title="$2 - $1">$2</a>',
+        '<a href="$1" rel="nofollow" title="$1">$1</a>',
+        '<div style="text-align: $1;">$2</div>',
+        '<img src="$1" alt="" />',
+        '<a href="mailto:$1">$2</a>',
+        '<a href="mailto:$1">$1</a>',
+        '<span style="font-family: $1;">$2</span>',
+        '<span style="font-size: $1;">$2</span>',
+        '<span style="color: $1;">$2</span>',
+        '<textarea class="code_container" rows="30" cols="70">$1</textarea>',
+        '<pre class="code">$1</pre>',
+        '<p>$1</p>',
+    );
+    $post = preg_replace ($bbcode_search, $bbcode_replace, $post);
+    preg_match_all ('/\[quote\]/i', $post, $matches);
+    $opentags = count($matches['0']);
+    preg_match_all ('/\[\/quote\]/i', $post, $matches);  
+    $closetags = count($matches['0']);
+    if ($opentags > 0) {
+        $unclosed = $opentags - $closetags;
+        for ($i = 0; $i < $unclosed; $i++) {
+            $post .= '</div></blockquote>';
+        }
+        $post = str_replace ('[' . 'quote]', '<blockquote><div class="quote">', $post);
+        $post = str_replace ('[/' . 'quote]', '</div></blockquote>', $post);
+    }
+    echo $post;
+}
+
 ?>

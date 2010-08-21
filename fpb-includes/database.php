@@ -290,9 +290,10 @@ class FPBDatabase
     public function GatherPostFromURIData($_data)
     {
         $posts = $this->DirectQuery("SELECT * FROM ".$this->TableName('posts')." WHERE post_type='post' AND post_status='publish'
-            AND post_name=?",array(0=>$_data['title']));
+            AND UPPER(post_name)=?",array(0=>strtoupper($_data['title'])));
         if (count($posts) == 1)
             return $posts[0];
+        print_r($_data);
         trigger_error("Unable to find the requested post!",E_USER_ERROR);
     }
 
@@ -301,7 +302,7 @@ class FPBDatabase
         $page--;  // decrement the page since our logic starts at 0 not 1
         $min = ($page * $limit);
         $max = ($page * $limit) + $limit;
-        return $this->DirectQuery("SELECT * FROM ".$this->TableName('posts')." WHERE post_type='post' AND post_status='publish'
+        return $this->DirectQuery("SELECT *, concat_ws('/',date_format(post_date,'%Y/%m/%d'),post_name) as uri FROM ".$this->TableName('posts')." WHERE post_type='post' AND post_status='publish'
             ORDER BY post_date DESC LIMIT ?, ?",array($min,$max));
     }
 
@@ -369,6 +370,27 @@ class FPBDatabase
             $page->uri = $_previous_slug.$page->post_name;
             $page->subpages = $this->FetchPageArray($page->ID, $_previous_slug.$page->post_name."/");
             array_push($ret,$page);
+        }
+        return $ret;
+    }
+
+    public function GetCommentsArray($_pageID)
+    {
+        return $this->FetchCommentArray($_pageID);
+    }
+
+    private function FetchCommentArray($_pageID, $_parent = 0)
+    {
+        $comments = $this->DirectQuery("select c.comment_ID, u.displayname, u.id as user_ID, c.comment_date,
+            c.comment_content from ".$this->TableName('comments')." c INNER JOIN ".$this->TableName('users')." u
+            ON c.user_id = u.id WHERE c.comment_post_ID = ? AND comment_parent = ?",array(0=>$_pageID, 1=>$_parent));
+        if (count($comments) == 0)
+            return null;
+        $ret = array();
+        foreach ($comments as $comment) {
+            $comment = (object) $comment;
+            $comment->subcomments = $this->FetchCommentArray($_pageID, $comment->comment_ID);
+            array_push($ret,$comment);
         }
         return $ret;
     }
