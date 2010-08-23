@@ -1,0 +1,46 @@
+# FacePress #
+#### *A holy marriage of blogging and Facebook* ####
+
+FacePress is a ground-up rewrite of a blogging engine similar to WordPress, but built with a severe integration with [FaceBook](http://www.facebook.com/ "For those of you unfamiliar with FaceBook").  All user-related functions are handled through the FaceBook API, such as user login, registration, etc, and the blogging engine simply keeps FBID's, e-mails, and display names in its database.  The database structure is exactly that of WordPress to in the future allow for a simple migration path.
+
+FacePress currently includes all standard features that one would expect out of a blogging engine:
+
++   Simplicity
++   Versatile templating/theming through the use of the [Smarty Templating Engine](www.smarty.net/)
++   WYSIWYG editor for pages and posts
++   A simple CMS for managing static pages
++   Allow users to comment in threads on posts
++   Archives
++   All sorts of SEO features
++   An open plugin architecture
++   ...and more!
+
+
+## Requirements ##
+
+    - PHP 5.x
+    - MySQL
+    - A FaceBook account
+    - Your website as a [registered FaceBook application](http://www.facebook.com/developers/createapp.php "Register your application with FaceBook").
+
+
+## Installation ##
+
+Coming soon!
+
+
+## License ##
+
+FacePress is released under the GNU General Public License v3 and is copyright &copy; 2010 [JiffSoft](http://www.jiffsoft.com "JiffSoft").  A copy of the license is available in the LICENSE file.
+
+
+## Support ##
+
+All bug tracking is being done via Google Code.  You can get to the Google Code project at [http://code.google.com/p/facepress-blog/](http://code.google.com/p/facepress-blog/)
+
+The LANRails website is at [http://www.facepressblog.org/](http://www.facepressblog.org/).
+
+
+## Theme Guide ##
+
+Coming soon!
