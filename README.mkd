@@ -18,10 +18,10 @@ FacePress currently includes all standard features that one would expect out of 
 
 ## Requirements ##
 
-    - PHP 5.x
-    - MySQL
-    - A FaceBook account
-    - Your website as a [registered FaceBook application](http://www.facebook.com/developers/createapp.php "Register your application with FaceBook").
++   PHP 5.x
++   MySQL
++   A FaceBook account
++   Your website as a [registered FaceBook application](http://www.facebook.com/developers/createapp.php "Register your application with FaceBook").
 
 
 ## Installation ##
