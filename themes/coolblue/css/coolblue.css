@@ -900,15 +900,3 @@ ul.archive li .post-details a:visited {
 	height:0;
 	content: " ";
 }
-
-.comment-list {
-    width: 477px;
-}
-
-.comment {
-    margin: 10px 25px 10px 25px;
-	padding: 10px 25px 25px 25px;
-    background: #F3F4F5;
-    border: 1px solid #E2E4E7;
-	width: 100%;
-}

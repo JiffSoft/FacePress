@@ -5,13 +5,18 @@
 
 	<!-- content -->
    <div id="content">
-        {section name=post loop=$posts}
-            {strip}
-                <h3>{$posts[post]->post_title}</h3>
-                {$posts[post]->post_content}
-                <br/><hr/><br/>
-            {/strip}
-        {/section}
+        <div id="main">
+            {section name=post loop=$posts}
+                {strip}
+                    <h3>{$posts[post]->post_title}</h3>
+                    {$posts[post]->post_content}
+                    <br/><hr/><br/>
+                {/strip}
+            {/section}
+        </div> <!-- main -->
+        <div id="sidebar">
+            {include file='sidebar.tpl'}
+        </div><!-- sidebar -->
     <!-- content -->
 	</div>
 

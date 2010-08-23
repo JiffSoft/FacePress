@@ -394,4 +394,12 @@ class FPBDatabase
         }
         return $ret;
     }
+
+    public function CreateComment($_form_data) {
+        $this->DirectQuery("insert into ".$this->TableName('comments')." (user_id, comment_date, comment_content, comment_parent, comment_post_ID)
+            values (?,CURRENT_TIMESTAMP,?,?,?)",array(0=>FPBAuth::GetInstance()->GetUser()->id, 1=>$_form_data['content'],
+                2=>$_form_data['reply_ID'], 3=>$_form_data['post_ID']));
+        if (mysql_error())
+            trigger_error('Unable to create comment: '.mysql_error());
+    }
 }
